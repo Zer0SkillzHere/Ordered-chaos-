@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import random
+
+def reflect_point(point, reflection_count):
+    reflected_points = [point]
+    for _ in range(reflection_count):
+        new_dimension = random.uniform(-1, 1)
+        point = list(point) + [new_dimension]
+        point[-1] = -point[-1]  # Reflect into the new axis
+        reflected_points.append(tuple(point))
+    return reflected_points
+
+# Generate a random starting point
+initial_point = (random.uniform(-1, 1),)
+
+reflection_count = 10
+points = reflect_point(initial_point, reflection_count)
+
+# Visualization
+dimensions = len(points[0])
+for i in range(dimensions):
+    plt.plot(range(len(points)), [p[i] for p in points], label=f'Dimension {i+1}')
+
+plt.xlabel('Reflection Count')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
